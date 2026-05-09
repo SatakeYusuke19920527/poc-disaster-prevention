@@ -1,0 +1,92 @@
+[
+  {
+    "id": "earthquake-basics-001",
+    "title": "地震発生時の初動対応",
+    "content": "地震が発生したら、まず身の安全を最優先にしてください。屋内では頑丈な机の下に身を伏せ、頭部を保護します。揺れが収まるまで動かず、収まったらガス・電気のブレーカーを確認してから屋外へ避難します。エレベーターは使用せず、階段を利用してください。海岸付近にいる場合は揺れの大きさにかかわらず直ちに高台へ避難します。",
+    "source": "気象庁 防災手引き",
+    "url": "https://www.jma.go.jp/jma/kishou/know/bosai/jishin.html",
+    "category": "earthquake",
+    "agentMode": "disaster-learning"
+  },
+  {
+    "id": "earthquake-evacuation-002",
+    "title": "地震後の避難所への移動",
+    "content": "避難所へ移動する際は、ヘルメットや帽子で頭を保護し、両手が空くリュックを背負います。ブロック塀・自動販売機・電柱の倒壊や落下物に注意してください。家族とは事前に集合場所と連絡方法（災害用伝言ダイヤル171など）を決めておくことが重要です。避難経路は最低2ルートを確認しておきましょう。",
+    "source": "内閣府 防災情報のページ",
+    "url": "https://www.bousai.go.jp/kyoiku/keigen/jisinhigai.html",
+    "category": "earthquake",
+    "agentMode": "disaster-learning"
+  },
+  {
+    "id": "tsunami-001",
+    "title": "津波からの避難",
+    "content": "強い揺れまたは弱くても長い揺れを感じたら、津波警報を待たずに直ちに高台または津波避難ビルへ避難してください。津波は繰り返し襲来し、第二波・第三波の方が大きいことがあります。警報解除まで絶対に海岸へ戻ってはいけません。徒歩避難が原則ですが、徒歩困難者は近距離の自動車避難も認められています。",
+    "source": "気象庁 津波防災",
+    "url": "https://www.data.jma.go.jp/eqev/data/tsunami/index.html",
+    "category": "tsunami",
+    "agentMode": "disaster-learning"
+  },
+  {
+    "id": "flood-001",
+    "title": "水害（洪水・内水氾濫）への備え",
+    "content": "大雨警報や河川氾濫の情報が出たら、ハザードマップで自宅の浸水想定を確認し、垂直避難（2階以上）または水平避難（指定避難所）を判断します。地下街・地下室は水が一気に流入するため危険です。冠水した道路は水深15cm以上で歩行が困難になり、車も30cm程度でエンジン停止の恐れがあります。",
+    "source": "国土交通省 川の防災情報",
+    "url": "https://www.river.go.jp/",
+    "category": "flood",
+    "agentMode": "disaster-learning"
+  },
+  {
+    "id": "stockpile-001",
+    "title": "家庭での備蓄品リスト",
+    "content": "最低3日分（推奨1週間分）の備蓄を心がけましょう。飲料水は1人1日3リットル、食料はレトルトご飯・乾パン・缶詰など。生活用品は携帯トイレ（1人1日5回×日数分）、カセットコンロ、懐中電灯、乾電池、ラジオ、救急セット、常備薬、現金（小銭含む）、モバイルバッテリーが重要です。乳幼児・高齢者・ペットがいる家庭は専用品も準備します。",
+    "source": "東京都 防災ブック「東京防災」",
+    "url": "https://www.bousai.metro.tokyo.lg.jp/1002147/index.html",
+    "category": "stockpile",
+    "agentMode": "disaster-learning"
+  },
+  {
+    "id": "simulation-shindo7-001",
+    "title": "震度7想定シミュレーション：木造家屋",
+    "content": "震度7では耐震基準を満たさない木造家屋の多くが倒壊または大破します。1981年（昭和56年）以前に建築された旧耐震基準の建物は特に危険です。家具の固定率が30%未満の家庭では家具転倒による負傷が多発します。シミュレーション結果では、夜間就寝中の発生時に死傷者が最大化する傾向があります。事前対策として耐震診断・補強と家具固定が最優先です。",
+    "source": "防災科学技術研究所 シナリオ研究",
+    "url": "https://www.bosai.go.jp/",
+    "category": "simulation",
+    "agentMode": "disaster-simulation"
+  },
+  {
+    "id": "simulation-tsunami-001",
+    "title": "南海トラフ地震 津波到達想定",
+    "content": "南海トラフ巨大地震では和歌山県・高知県・三重県の一部沿岸で地震発生から最短2〜5分で津波第一波が到達すると想定されています。最大津波高は静岡県下田市・高知県土佐清水市などで30m超に達する可能性があります。避難開始の遅れ1分が生存率に直結するため、揺れを感じた瞬間に避難開始する訓練が不可欠です。",
+    "source": "内閣府 南海トラフ巨大地震対策",
+    "url": "https://www.bousai.go.jp/jishin/nankai/index.html",
+    "category": "simulation",
+    "agentMode": "disaster-simulation"
+  },
+  {
+    "id": "furusato-tokyo-001",
+    "title": "東京都の地域防災情報",
+    "content": "東京都では『東京都防災アプリ』で区市町村ごとの避難所、ハザードマップ、災害時行動マニュアルを提供しています。首都直下地震の被害想定は最大震度7、想定死者数約6,150人、建物全壊約19万棟。木密地域（木造住宅密集地域）では延焼火災のリスクが高く、地域防災計画で重点対策エリアが指定されています。",
+    "source": "東京都防災ホームページ",
+    "url": "https://www.bousai.metro.tokyo.lg.jp/",
+    "category": "furusato",
+    "agentMode": "furusato"
+  },
+  {
+    "id": "furusato-osaka-001",
+    "title": "大阪府の地域防災情報",
+    "content": "大阪府では上町断層帯地震（最大震度7）と南海トラフ巨大地震（最大震度6強・津波）が主要なリスクです。大阪市内の津波浸水想定は最大5m、木津川・大正区などの低地で浸水深が深くなります。府内の指定緊急避難場所は『おおさか防災ネット』で検索可能です。淀川氾濫時は地下鉄駅構内への浸水も想定されます。",
+    "source": "大阪府防災情報",
+    "url": "https://www.osaka-bousai.net/",
+    "category": "furusato",
+    "agentMode": "furusato"
+  },
+  {
+    "id": "furusato-hokkaido-001",
+    "title": "北海道の地域防災情報",
+    "content": "北海道では千島海溝・日本海溝沿いの巨大地震による津波（道東で最大28m想定）、冬期の暴風雪、火山噴火（有珠山・樽前山等）が主要リスクです。冬期災害時は低体温症対策が重要で、屋内避難でも厳寒対策（毛布・カイロ・燃料）が必須。道内全域で停電による暖房停止が生命リスクとなるため、自家発電やカセットガスストーブの備えが推奨されます。",
+    "source": "北海道防災情報",
+    "url": "https://www.bousai-hokkaido.jp/",
+    "category": "furusato",
+    "agentMode": "furusato"
+  }
+]

@@ -1,0 +1,13 @@
+local.settings.json
+.env
+.env.*
+!.env.example
+*.log
+.azure
+.vscode
+*.ts
+!*.d.ts
+tsconfig.json
+.gitignore
+README.md
+src

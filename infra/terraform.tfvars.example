@@ -1,0 +1,18 @@
+project         = "pocdisaster"
+environment     = "dev"
+location        = "japaneast"
+openai_location = "japaneast"
+
+openai_model_intent         = "gpt-4o-mini"
+openai_model_intent_version = "2024-07-18"
+openai_model_agent          = "gpt-4o-mini"
+openai_model_agent_version  = "2024-07-18"
+openai_deployment_capacity  = 50
+
+search_sku = "basic"
+
+tags = {
+  project = "poc-disaster-prevention"
+  managed = "terraform"
+  env     = "dev"
+}
