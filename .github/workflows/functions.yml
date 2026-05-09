@@ -50,3 +50,18 @@ jobs:
           app-name: ${{ vars.AZURE_FUNCTIONAPP_NAME }}
           package: functions
           sku: flexconsumption
+
+      # functions-action injects an empty-key AzureWebJobsStorage app setting
+      # which breaks identity-based access. Remove it after every deploy.
+      - name: Strip injected AzureWebJobsStorage (identity-based config)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          az functionapp config appsettings delete \
+            -g ${{ vars.AZURE_RESOURCE_GROUP }} \
+            -n ${{ vars.AZURE_FUNCTIONAPP_NAME }} \
+            --setting-names AzureWebJobsStorage \
+            -o none
+          az functionapp restart \
+            -g ${{ vars.AZURE_RESOURCE_GROUP }} \
+            -n ${{ vars.AZURE_FUNCTIONAPP_NAME }} \
+            -o none
