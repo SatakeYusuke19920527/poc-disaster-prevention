@@ -67,5 +67,12 @@ variable "tags" {
   default = {
     project = "poc-disaster-prevention"
     managed = "terraform"
+    env     = "dev"
   }
+}
+
+variable "developer_object_id" {
+  description = "Optional Entra ID object ID for a developer/team that should also receive RBAC for local debugging. Leave null to skip developer RBAC (e.g. when applying from CI)."
+  type        = string
+  default     = null
 }
