@@ -38,6 +38,7 @@ jobs:
         run: npm run build
         env:
           NEXT_PUBLIC_API_BASE_URL: ${{ vars.NEXT_PUBLIC_API_BASE_URL }}
+          NEXT_PUBLIC_AZURE_MAPS_KEY: ${{ vars.NEXT_PUBLIC_AZURE_MAPS_KEY }}
 
       - name: Deploy to Azure Static Web Apps
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'

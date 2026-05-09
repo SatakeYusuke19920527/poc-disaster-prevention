@@ -1,8 +1,11 @@
 import type {
   ChatRequest,
   ChatResponse,
+  LatLng,
+  NearbySheltersResponse,
   OrchestrationStatus,
   StartChatResponse,
+  WalkingRoute,
 } from "./types";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "";
@@ -87,4 +90,38 @@ export async function pollChatUntilComplete(
     }
     await new Promise((r) => setTimeout(r, intervalMs));
   }
+}
+
+export async function getNearbyShelters(
+  origin: LatLng,
+  topK = 5,
+  signal?: AbortSignal
+): Promise<NearbySheltersResponse> {
+  const url = buildUrl(
+    `/api/shelters/nearby?lat=${origin.lat}&lng=${origin.lng}&topK=${topK}`
+  );
+  const res = await fetch(url, { method: "GET", signal, cache: "no-store" });
+  if (!res.ok) {
+    throw new Error(
+      `getNearbyShelters failed: ${res.status} ${res.statusText}`
+    );
+  }
+  return (await res.json()) as NearbySheltersResponse;
+}
+
+export async function getWalkingRoute(
+  from: LatLng,
+  to: LatLng,
+  signal?: AbortSignal
+): Promise<WalkingRoute> {
+  const res = await fetch(buildUrl("/api/route/walk"), {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ from, to }),
+    signal,
+  });
+  if (!res.ok) {
+    throw new Error(`getWalkingRoute failed: ${res.status} ${res.statusText}`);
+  }
+  return (await res.json()) as WalkingRoute;
 }

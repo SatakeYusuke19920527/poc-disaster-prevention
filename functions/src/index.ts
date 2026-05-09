@@ -11,6 +11,8 @@ import "./functions/aggregateAnswer";
 import "./functions/applyGuardrails";
 import "./functions/saveConversation";
 import "./functions/trackTelemetry";
+import "./functions/getNearbyShelters";
+import "./functions/getWalkingRoute";
 
 import { initAppInsights } from "./services/appInsights";
 

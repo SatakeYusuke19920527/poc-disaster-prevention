@@ -49,3 +49,13 @@ output "application_insights_connection_string" {
   value     = azurerm_application_insights.main.connection_string
   sensitive = true
 }
+
+output "azure_maps_account_name" {
+  value = azurerm_maps_account.main.name
+}
+
+output "azure_maps_secondary_key" {
+  description = "フロントエンドの NEXT_PUBLIC_AZURE_MAPS_KEY に設定する値 (PoC のため公開許容)"
+  value       = azurerm_maps_account.main.secondary_access_key
+  sensitive   = true
+}

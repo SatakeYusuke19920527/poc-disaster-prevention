@@ -6,16 +6,25 @@ export async function getChatStatus(
   context: InvocationContext
 ): Promise<HttpResponseInit> {
   const instanceId = req.params.instanceId;
-  if (!instanceId) {
+  if (!instanceId || instanceId === "undefined" || instanceId === "null") {
     return { status: 400, jsonBody: { error: "instanceId is required." } };
   }
 
   const client = df.getClient(context);
-  const status = await client.getStatus(instanceId, {
+  let status;
+  try {
+    status = await client.getStatus(instanceId, {
     showInput: false,
     showHistory: false,
     showHistoryOutput: false,
-  });
+    });
+  } catch (e) {
+    context.error("getStatus failed", e);
+    return {
+      status: 500,
+      jsonBody: { error: "Failed to fetch orchestration status." },
+    };
+  }
 
   if (!status) {
     return { status: 404, jsonBody: { error: "Instance not found." } };

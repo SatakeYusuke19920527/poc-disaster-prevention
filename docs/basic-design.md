@@ -2,6 +2,8 @@
 
 防災マルチエージェントチャット PoC のシステム全体構成・モジュール分割・データ設計などの基本設計を示す。
 
+> 関連: [要件定義書](./requirements.md) / [詳細設計書](./detailed-design.md) / [データ設計書](./data-design.md) / [セキュリティ設計書](./security-design.md) / [API 仕様](./api-spec.md)
+
 ## 1. システム全体構成
 
 ### 1.1 構成図
@@ -148,6 +150,9 @@ flowchart TB
 ```
 
 ## 5. データ設計
+
+> 詳細は [data-design.md](./data-design.md) を参照。本章は概要のみ。
+
 
 ### 5.1 Cosmos DB
 
@@ -339,6 +344,8 @@ flowchart LR
 - Cosmos / OpenAI のスループット・コストは Azure Cost Management で確認
 
 ## 9. セキュリティ設計（基本方針）
+
+> 詳細は [security-design.md](./security-design.md) を参照。
 
 - シークレット非ハードコード／環境変数注入
 - Local Auth 無効化＋Managed Identity ＋ RBAC

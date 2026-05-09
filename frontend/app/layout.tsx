@@ -13,9 +13,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "防災マルチエージェントチャット",
+  title: "PoC disaster prevention Chat",
   description:
-    "Next.js + Azure Durable Functions による防災対策マルチエージェントチャットの PoC",
+    "PoC disaster prevention Chat — multi-agent disaster preparedness assistant powered by Next.js and Azure Durable Functions.",
+  icons: {
+    icon: "/logo.svg",
+  },
 };
 
 export default function RootLayout({
@@ -25,10 +28,12 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="ja"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="bg-background text-foreground min-h-full flex flex-col">
+        {children}
+      </body>
     </html>
   );
 }

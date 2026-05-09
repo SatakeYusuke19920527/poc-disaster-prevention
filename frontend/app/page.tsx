@@ -1,11 +1,5 @@
-import { ChatWindow } from "@/components/ChatWindow";
-import { MapPanel } from "@/components/MapPanel";
+import { AppShell } from "@/components/AppShell";
 
 export default function Home() {
-  return (
-    <main className="flex h-screen w-full">
-      <ChatWindow />
-      <MapPanel />
-    </main>
-  );
+  return <AppShell />;
 }

@@ -2,6 +2,8 @@
 
 防災マルチエージェントチャット PoC の詳細設計を、API 仕様・型定義・関数別ロジック・データスキーマ・処理シーケンス・例外処理の単位で記述する。
 
+> 関連: [要件定義書](./requirements.md) / [基本設計書](./basic-design.md) / [API 仕様](./api-spec.md) ([openapi.yaml](./api/openapi.yaml)) / [データ設計書](./data-design.md) / [プロンプト設計書](./prompt-design.md) / [セキュリティ設計書](./security-design.md) / [運用 Runbook](./operations-runbook.md) / [テスト方針](./test-plan.md)
+
 ## 1. 共通型定義
 
 `functions/src/types/chat.ts` の型を全層で共有する。
@@ -37,6 +39,9 @@ interface OrchestratorOutput {
 ```
 
 ## 2. HTTP API 仕様
+
+> 正準定義は [api/openapi.yaml](./api/openapi.yaml)、要約は [api-spec.md](./api-spec.md) を参照。本章はサマリ。
+
 
 ### 2.1 `POST /api/chat/start`
 
@@ -246,6 +251,9 @@ flowchart TB
 
 ## 5. プロンプト方針
 
+> 詳細は [prompt-design.md](./prompt-design.md) を参照。本章は要点のみ。
+
+
 ### 5.1 共通方針
 
 - 出力はマークダウン
@@ -269,6 +277,9 @@ flowchart TB
 - Disaster Learning：基礎知識・FAQ・教育目的
 
 ## 6. データスキーマ詳細
+
+> 詳細は [data-design.md](./data-design.md) を参照。本章はサマリ。
+
 
 ### 6.1 Cosmos `conversations`
 
@@ -426,6 +437,9 @@ API キーはローカル開発時のみ任意で設定可。実環境は `Defau
 
 ## 11. テスト方針（PoC）
 
+> 詳細は [test-plan.md](./test-plan.md) を参照。本章は概要。
+
+
 | レイヤ | 内容 |
 | --- | --- |
 | ユニット | `selectAgent` / `applyGuardrails` / 意図分類パース |
@@ -434,6 +448,9 @@ API キーはローカル開発時のみ任意で設定可。実環境は `Defau
 | 性能 | 単発リクエストでレイテンシ計測（App Insights） |
 
 ## 12. デプロイ手順（概要）
+
+> 完全手順は [deployment.md](./deployment.md)、ローカル開発は [development-setup.md](./development-setup.md) を参照。
+
 
 1. `infra/` で `terraform init && terraform apply`
 2. `terraform output` から `api_base_url` / `function_app_name` / `static_web_app_api_key` を取得

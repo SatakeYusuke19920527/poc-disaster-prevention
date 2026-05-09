@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, FormEvent, KeyboardEvent } from "react";
+import { Button } from "@/components/ui/button";
+import { Loader2, SendHorizontal } from "lucide-react";
 
 interface Props {
   onSend: (message: string) => void;
@@ -27,24 +29,39 @@ export function MessageInput({ onSend, disabled }: Props) {
   return (
     <form
       onSubmit={submit}
-      className="flex items-end gap-2 border-t border-gray-200 bg-white p-3"
+      className="border-border/60 bg-background border-t p-4"
     >
-      <textarea
-        className="flex-1 resize-none rounded border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
-        rows={2}
-        placeholder="質問を入力 (Cmd/Ctrl+Enter で送信)"
-        value={value}
-        disabled={disabled}
-        onChange={(e) => setValue(e.target.value)}
-        onKeyDown={handleKeyDown}
-      />
-      <button
-        type="submit"
-        disabled={disabled || !value.trim()}
-        className="rounded bg-blue-600 px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"
-      >
-        送信
-      </button>
+      <div className="border-border/60 focus-within:border-primary/60 focus-within:ring-primary/20 mx-auto flex max-w-3xl items-end gap-2 rounded-2xl border bg-white p-2 shadow-sm transition focus-within:ring-4 dark:bg-neutral-900">
+        <textarea
+          className="placeholder:text-muted-foreground min-h-[44px] flex-1 resize-none border-0 bg-transparent px-2 py-2 text-sm focus:outline-none disabled:opacity-50"
+          rows={1}
+          placeholder="質問を入力 (Cmd/Ctrl + Enter で送信)"
+          value={value}
+          disabled={disabled}
+          onChange={(e) => {
+            setValue(e.target.value);
+            const t = e.currentTarget;
+            t.style.height = "auto";
+            t.style.height = `${Math.min(t.scrollHeight, 200)}px`;
+          }}
+          onKeyDown={handleKeyDown}
+        />
+        <Button
+          type="submit"
+          size="icon"
+          disabled={disabled || !value.trim()}
+          className="h-9 w-9 shrink-0 rounded-xl"
+        >
+          {disabled ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          ) : (
+            <SendHorizontal className="h-4 w-4" />
+          )}
+        </Button>
+      </div>
+      <p className="text-muted-foreground mt-2 text-center text-[11px]">
+        本サービスは PoC です。回答の正確性は保証されません。
+      </p>
     </form>
   );
 }

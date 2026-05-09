@@ -1,0 +1,188 @@
+openapi: 3.0.3
+info:
+  title: Disaster Prevention Multi-Agent Chat API
+  version: 0.1.0
+  description: |
+    防災マルチエージェントチャット PoC のバックエンド API。
+    Azure Functions (HTTP + Durable Functions) で実装。
+servers:
+  - url: http://localhost:7071
+    description: Local
+  - url: https://{functionApp}.azurewebsites.net
+    description: Azure
+    variables:
+      functionApp:
+        default: example-func
+
+tags:
+  - name: chat
+    description: チャット関連 API
+
+paths:
+  /api/chat/start:
+    post:
+      tags: [chat]
+      summary: チャット開始（オーケストレーション起動）
+      operationId: startChat
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+            examples:
+              auto:
+                value:
+                  sessionId: s-abc-001
+                  userId: u-001
+                  message: 地震の備えを教えて
+                  agentMode: auto
+              manual:
+                value:
+                  sessionId: s-abc-002
+                  userId: u-001
+                  message: ○○市の避難所は？
+                  agentMode: furusato
+      responses:
+        '202':
+          description: 受付済み（オーケストレーション ID 返却）
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartChatResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /api/chat/status/{instanceId}:
+    get:
+      tags: [chat]
+      summary: チャットステータス取得（ポーリング）
+      operationId: getChatStatus
+      parameters:
+        - in: path
+          name: instanceId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 現在の状態
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+        '404':
+          description: インスタンス未検出
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    AgentMode:
+      type: string
+      enum: [auto, furusato, disaster-simulation, disaster-learning]
+    AgentName:
+      type: string
+      enum: [furusato, disaster-simulation, disaster-learning, multi-agent]
+    Confidence:
+      type: string
+      enum: [low, medium, high]
+    RuntimeStatus:
+      type: string
+      enum: [Pending, Running, Completed, Failed, Terminated]
+
+    ChatRequest:
+      type: object
+      required: [sessionId, userId, message, agentMode]
+      properties:
+        sessionId:
+          type: string
+          minLength: 1
+        userId:
+          type: string
+          minLength: 1
+        message:
+          type: string
+          minLength: 1
+        agentMode:
+          $ref: '#/components/schemas/AgentMode'
+
+    StartChatResponse:
+      type: object
+      required: [instanceId]
+      properties:
+        instanceId:
+          type: string
+        statusQueryGetUri:
+          type: string
+          format: uri
+
+    Citation:
+      type: object
+      properties:
+        title: { type: string }
+        source: { type: string }
+        url: { type: string, format: uri }
+        score: { type: number, format: float }
+
+    TokenUsage:
+      type: object
+      required: [input, output]
+      properties:
+        input: { type: integer, minimum: 0 }
+        output: { type: integer, minimum: 0 }
+
+    OrchestratorOutput:
+      type: object
+      required: [answer, agent, citations, metadata]
+      properties:
+        answer: { type: string }
+        agent: { $ref: '#/components/schemas/AgentName' }
+        citations:
+          type: array
+          items: { $ref: '#/components/schemas/Citation' }
+        metadata:
+          type: object
+          required: [intent, latencyMs, tokenUsage]
+          properties:
+            intent: { type: string }
+            latencyMs: { type: integer }
+            tokenUsage: { $ref: '#/components/schemas/TokenUsage' }
+
+    StatusResponse:
+      type: object
+      required: [runtimeStatus]
+      properties:
+        runtimeStatus: { $ref: '#/components/schemas/RuntimeStatus' }
+        output:
+          $ref: '#/components/schemas/OrchestratorOutput'
+        createdTime: { type: string, format: date-time }
+        lastUpdatedTime: { type: string, format: date-time }
+
+    Error:
+      type: object
+      required: [error]
+      properties:
+        error: { type: string }
+        code:
+          type: string
+          enum: [INVALID_REQUEST, UPSTREAM_ERROR, INTERNAL_ERROR]
+
+  responses:
+    BadRequest:
+      description: 入力検証エラー
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+          examples:
+            missingField:
+              value: { error: "agentMode is required", code: INVALID_REQUEST }
+    InternalError:
+      description: 想定外のエラー
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }

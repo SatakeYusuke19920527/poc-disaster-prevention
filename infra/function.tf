@@ -51,8 +51,10 @@ resource "azurerm_function_app_flex_consumption" "main" {
     COSMOS_DATABASE                = azurerm_cosmosdb_sql_database.main.name
     COSMOS_CONTAINER_CONVERSATIONS = azurerm_cosmosdb_sql_container.conversations.name
 
-    BLOB_ACCOUNT_URL     = azurerm_storage_account.main.primary_blob_endpoint
+    BLOB_ACCOUNT_URL      = azurerm_storage_account.main.primary_blob_endpoint
     BLOB_CONTAINER_ASSETS = azurerm_storage_container.assets.name
+
+    AZURE_MAPS_SUBSCRIPTION_KEY = azurerm_maps_account.main.primary_access_key
   }
 
   tags = var.tags

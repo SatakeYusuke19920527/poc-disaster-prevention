@@ -1,3 +1,6 @@
+import { Button } from "@/components/ui/button";
+import { AlertTriangle, RotateCcw } from "lucide-react";
+
 interface Props {
   message: string;
   onRetry?: () => void;
@@ -5,16 +8,22 @@ interface Props {
 
 export function ErrorMessage({ message, onRetry }: Props) {
   return (
-    <div className="mx-4 my-2 flex items-center justify-between gap-3 rounded border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-700">
-      <span>{message}</span>
+    <div className="border-destructive/30 bg-destructive/10 text-destructive mx-auto my-3 flex max-w-3xl items-center justify-between gap-3 rounded-xl border px-4 py-3 text-sm">
+      <div className="flex items-center gap-2">
+        <AlertTriangle className="h-4 w-4 shrink-0" />
+        <span>{message}</span>
+      </div>
       {onRetry && (
-        <button
+        <Button
           type="button"
+          variant="outline"
+          size="sm"
           onClick={onRetry}
-          className="rounded border border-red-400 px-2 py-1 text-xs font-semibold hover:bg-red-100"
+          className="border-destructive/40 text-destructive hover:bg-destructive/10 h-8"
         >
+          <RotateCcw className="mr-1.5 h-3.5 w-3.5" />
           再試行
-        </button>
+        </Button>
       )}
     </div>
   );

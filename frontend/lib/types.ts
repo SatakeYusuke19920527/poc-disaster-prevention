@@ -74,3 +74,31 @@ export interface ChatMessage {
   citations?: Citation[];
   createdAt: number;
 }
+
+export interface LatLng {
+  lat: number;
+  lng: number;
+}
+
+export interface Shelter {
+  id: string;
+  name: string;
+  address: string;
+  lat: number;
+  lng: number;
+  category: string;
+  distanceMeters: number;
+}
+
+export interface NearbySheltersResponse {
+  shelters: Shelter[];
+}
+
+export interface WalkingRoute {
+  distanceMeters: number;
+  travelTimeSeconds: number;
+  geometry: {
+    type: "LineString";
+    coordinates: [number, number][];
+  };
+}

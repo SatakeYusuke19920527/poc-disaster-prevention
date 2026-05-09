@@ -45,4 +45,7 @@ export const env = {
   appInsights: {
     connectionString: () => getEnv("APPLICATIONINSIGHTS_CONNECTION_STRING"),
   },
+  maps: {
+    subscriptionKey: () => requireEnv("AZURE_MAPS_SUBSCRIPTION_KEY"),
+  },
 };

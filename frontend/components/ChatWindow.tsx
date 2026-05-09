@@ -83,17 +83,14 @@ export function ChatWindow() {
   }, [send]);
 
   return (
-    <div className="flex h-full flex-1 flex-col bg-white">
-      <header className="flex items-center justify-between border-b border-gray-200 px-4 py-3">
-        <h1 className="text-base font-semibold text-gray-800">
-          防災マルチエージェントチャット
-        </h1>
+    <section className="bg-muted/20 flex h-full w-full flex-col">
+      <div className="flex items-center justify-end px-6 pt-3">
         <AgentSelector
           value={agentMode}
           onChange={setAgentMode}
           disabled={isLoading}
         />
-      </header>
+      </div>
 
       <div className="flex-1 overflow-y-auto">
         <MessageList messages={messages} />
@@ -102,6 +99,6 @@ export function ChatWindow() {
       </div>
 
       <MessageInput onSend={send} disabled={isLoading} />
-    </div>
+    </section>
   );
 }

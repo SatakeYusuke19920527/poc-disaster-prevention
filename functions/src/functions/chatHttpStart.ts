@@ -34,7 +34,23 @@ export async function chatHttpStart(
   const instanceId = await client.startNew("chatOrchestrator", { input });
   context.log(`Started orchestration with ID = '${instanceId}'.`);
 
-  return client.createCheckStatusResponse(req, instanceId);
+  const checkStatus = client.createCheckStatusResponse(req, instanceId);
+  let extras: Record<string, unknown> = {};
+  try {
+    const body =
+      typeof checkStatus.body === "string"
+        ? JSON.parse(checkStatus.body)
+        : checkStatus.body ?? {};
+    extras = body as Record<string, unknown>;
+  } catch {
+    extras = {};
+  }
+
+  return {
+    status: 202,
+    headers: checkStatus.headers,
+    jsonBody: { ...extras, instanceId },
+  };
 }
 
 app.http("chatHttpStart", {
