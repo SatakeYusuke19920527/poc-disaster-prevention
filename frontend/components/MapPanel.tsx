@@ -13,6 +13,7 @@ import {
   Navigation,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import "azure-maps-control/dist/atlas.min.css";
 
 const AZURE_MAPS_KEY = process.env.NEXT_PUBLIC_AZURE_MAPS_KEY ?? "";
 
@@ -62,8 +63,6 @@ export function MapPanel() {
     let cancelled = false;
     (async () => {
       const atlas = await import("azure-maps-control");
-      // CSS is required for Azure Maps Control
-      await import("azure-maps-control/dist/atlas.min.css");
 
       if (cancelled || !mapContainerRef.current) return;
       atlasRef.current = atlas;
